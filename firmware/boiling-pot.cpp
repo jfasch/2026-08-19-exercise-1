@@ -4,9 +4,12 @@
 
 #include <iostream>
 #include <memory>
+#include <chrono>
+#include <thread>
 
 
 using namespace std;
+using namespace std::chrono_literals;
 
 class StdOutSwitch : public Switch
 {
@@ -20,14 +23,14 @@ public:
 int main(int argc, char** argv)
 {
     RandomSensor sensor(0, 100);
-    auto unique_ptr<Switch> switcH = make_unique<StdOutSwitch>();
+    auto switcH = make_unique<StdOutSwitch>();
 
     BoilingPot pot(&sensor, switcH.get());
 
     pot.heat(37.5);
 
     while (true) {
-        sleep(1);
+        std::this_thread::sleep_for(1s);
         pot.check();
     }
 }

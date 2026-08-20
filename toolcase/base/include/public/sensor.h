@@ -1,5 +1,7 @@
 #pragma once
 
+#include <error.h>
+
 class Sensor
 {
 public:
